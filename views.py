@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout, get_user_model
 from .forms import CustomUserCreationForm, ViaticoForm, CustomAuthenticationForm
 from .models import Viatico
+User = get_user_model()
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -18,15 +23,31 @@ def register(request):
 @login_required
 def registrar_viatico(request):
     if request.method == 'POST':
-        form = ViaticoForm(request.POST)
-        if form.is_valid():
-            viatico = form.save(commit=False)
-            viatico.user = request.user
-            viatico.save()
-            return redirect('home')
-    else:
-        form = ViaticoForm()
-    return render(request, 'registrar_viatico.html', {'form': form})
+        solicitud = request.POST['solicitud']
+        sustentos = request.POST['sustentos']
+        viatico = Viatico(user=request.user, solicitud=solicitud, sustentos=sustentos)
+        viatico.save()
+        return redirect('home')
+    return render(request, 'registrar_viatico.html')
+
+@login_required
+def listar_viaticos(request):
+    if request.user.role not in ['administrador', 'gerencia']:
+        return redirect('home')
+    viaticos = Viatico.objects.all()
+    return render(request, 'listar_viaticos.html', {'viaticos': viaticos})
+
+@login_required
+def ver_viatico(request, viatico_id):
+    if request.user.role not in ['administrador', 'gerencia']:
+        return redirect('home')
+    viatico = Viatico.objects.get(id=viatico_id)
+    if request.method == 'POST':
+        viatico.aprobado = True
+        viatico.save()
+        return redirect('listar_viaticos')
+    return render(request, 'aprobar_viatico.html', {'viatico': viatico})
+
 from django.shortcuts import render
 @login_required
 def home(request):
@@ -47,3 +68,16 @@ def login_view(request):
     else:
         form = CustomAuthenticationForm()
     return render(request, 'login.html', {'form': form})
+@login_required
+def aprobar_viatico(request, viatico_id):
+    if request.user.role not in ['administrador', 'gerencia']:
+        return redirect('home')
+    viatico = Viatico.objects.get(id=viatico_id)
+    if request.method == 'POST':
+        viatico.aprobado = True
+        viatico.save()
+        return redirect('listar_viaticos')
+    return render(request, 'aprobar_viatico.html', {'viatico': viatico})
+def logout_view(request):
+    logout(request)
+    return redirect('login')

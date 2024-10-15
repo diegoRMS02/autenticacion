@@ -3,18 +3,44 @@
   <head>
     <title>Inicio de Sesión</title>
     {% load static %}
-    <!-- Asegúrate de cargar la etiqueta static aquí -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'css/styles.css' %}"
+      href="{% static 'css/login.css' %}"
     />
   </head>
   <body>
-    <h2>Inicio de Sesión</h2>
-    <form method="post">
+    <!-- <form method="post">
+      <h2>Inicio de Sesión</h2>
       {% csrf_token %} {{ form.as_p }}
       <button type="submit">Iniciar Sesión</button>
     </form>
+    <p>
+      ¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>
+    </p> -->
+    <div class="container">
+      <div class="left-panel">
+        <h1>ERP SMARTRH</h1>
+        <h2>Sistema Operativo ERP Micro o pequeñas</h2>
+        <p>
+          Este sistema operativo gestiona a las Mypes a crecer de manera
+          efectiva e innovar para una administración clara, evitando errores a
+          futuros que tengan estas.
+        </p>
+      </div>
+      <div class="right-panel">
+        <h2>Sistema Operativo ERP Micro o pequeña</h2>
+
+        <form method="post">
+          <h2>Inicio de Sesión</h2>
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>
+          ¿No tienes una cuenta?
+          <a href="{% url 'register' %}">Regístrate aquí</a>
+        </p>
+      </div>
+    </div>
   </body>
 </html>

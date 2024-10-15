@@ -6,7 +6,11 @@
   <body>
     <h2>Registrar Solicitud de Viático</h2>
     <form method="post">
-      {% csrf_token %} {{ form.as_p }}
+      {% csrf_token %}
+      <label for="solicitud">Solicitud:</label>
+      <textarea id="solicitud" name="solicitud"></textarea><br />
+      <label for="sustentos">Sustentos:</label>
+      <textarea id="sustentos" name="sustentos"></textarea><br />
       <button type="submit">Registrar</button>
     </form>
   </body>

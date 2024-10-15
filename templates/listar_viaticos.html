@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listar Viáticos</title>
+  </head>
+  <body>
+    <h2>Lista de Solicitudes de Viáticos</h2>
+    <table>
+      <tr>
+        <th>Usuario</th>
+        <th>Solicitud</th>
+        <th>Sustentos</th>
+        <th>Aprobado</th>
+        <th>Acción</th>
+      </tr>
+      {% for viatico in viaticos %}
+      <tr>
+        <td>{{ viatico.user.username }}</td>
+        <td>{{ viatico.solicitud }}</td>
+        <td>{{ viatico.sustentos }}</td>
+        <td>{{ viatico.aprobado }}</td>
+        <td>
+          {% if not viatico.aprobado %}
+          <a href="{% url 'aprobar_viatico' viatico.id %}">Aprobar</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

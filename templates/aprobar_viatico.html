@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aprobar Viático</title>
+  </head>
+  <body>
+    <h2>Aprobar Solicitud de Viático</h2>
+    <p><strong>Usuario:</strong> {{ viatico.user.username }}</p>
+    <p><strong>Solicitud:</strong> {{ viatico.solicitud }}</p>
+    <p><strong>Sustentos:</strong> {{ viatico.sustentos }}</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Aprobar</button>
+    </form>
+  </body>
+</html>

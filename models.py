@@ -8,6 +8,7 @@ class Usuario(AbstractUser):
         ('gerencia', 'Gerencia'),
     )
     role = models.CharField(max_length=50, choices=ROLE_CHOICES)
+    ocupacion = models.CharField(max_length=100, blank=True, null=True)  # Nuevo campo
 
 class Viatico(models.Model):
     user = models.ForeignKey(Usuario, on_delete=models.CASCADE)

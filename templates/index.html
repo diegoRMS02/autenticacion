@@ -1,9 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Inicio</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
   </head>
   <body>
-    <h1>Bienvenido a la página de inicio</h1>
+    <header class="header">
+      <div class="bienvenido">
+        <h2>Bienvenido a SMART RH</h2>
+      </div>
+      <div class="user">
+        {% if user.is_authenticated %}
+        <p>Hola, {{ user.username }}!</p>
+        <p>Rol: {{ user.role }}</p>
+        <p>Ocupacion: {{ user.ocupacion}}</p>
+        <div class="boton-logout">
+          <!-- Botón para cerrar sesión -->
+          <a href="{% url 'logout' %}">
+            <button class="logout">Cerrar Sesión</button>
+          </a>
+        </div>
+      </div>
+    </header>
+    <main class="container">
+      <div class="botones">
+        <!-- Botón para todos los roles -->
+        <img src="{% static 'images/register.png' %}" alt="Ejemplo de Imagen" />
+
+        <a href="{% url 'registrar_viatico' %}">
+          <button class="boton-menu">Registrar Viático</button>
+        </a>
+      </div>
+      <div class="botones">
+        <img src="{% static 'images/aprobar.png' %}" alt="Ejemplo de Imagen" />
+
+        <!-- Botón extra solo para roles 'administrador' o 'gerencia' -->
+        {% if user.role == 'administrador' or user.role == 'gerencia' %}
+        <a href="{% url 'listar_viaticos' %}">
+          <button class="boton-menu">Aprobar Viático</button>
+        </a>
+        {% endif %}
+      </div>
+
+      {% else %}
+      <p>No has iniciado sesión.</p>
+      <a href="{% url 'login' %}">Iniciar Sesión</a>
+      {% endif %}
+    </main>
+    <footer>
+      <p>Todos los derechos reservados.</p>
+      <p>Desarrollado por: Grupo 3</p>
+    </footer>
   </body>
 </html>
