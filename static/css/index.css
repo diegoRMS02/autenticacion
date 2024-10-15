@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0f0f1;
+
+  height: 100vh;
+}
+header {
+  background-color: #2f6578;
+  color: white;
+}
+.header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+header h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.sidebar {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.container {
+  background-color: white;
+  padding: 5rem;
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  color: white;
+  height: 70%;
+}
+
+/* .app-item:hover {
+  background-color: #1f4c5b;
+  cursor: pointer;
+} */
+.icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+/* .boton-logout {
+  margin-left: auto;
+  color: black;
+  border-radius: 5px;
+} */
+.logout {
+  margin-left: auto;
+  color: black;
+  cursor: pointer;
+}
+.botones {
+  height: 250px;
+  padding: 1rem;
+  background-color: #ffffff;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s;
+}
+.botones:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.botones img {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+.boton-menu {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+.boton-menu:hover {
+  background-color: #45a049;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+footer {
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.boton-menu {
+  height: 200px;
+  width: 250px;
+}
+.logout {
+  width: 120px;
+  height: 50px;
+}
