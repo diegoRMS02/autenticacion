@@ -1,31 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Listar Viáticos</title>
+    {% load static %}
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/listar_viaticos.css' %}"
+    />
   </head>
   <body>
-    <h2>Lista de Solicitudes de Viáticos</h2>
-    <table>
-      <tr>
-        <th>Usuario</th>
-        <th>Solicitud</th>
-        <th>Sustentos</th>
-        <th>Aprobado</th>
-        <th>Acción</th>
-      </tr>
-      {% for viatico in viaticos %}
-      <tr>
-        <td>{{ viatico.user.username }}</td>
-        <td>{{ viatico.solicitud }}</td>
-        <td>{{ viatico.sustentos }}</td>
-        <td>{{ viatico.aprobado }}</td>
-        <td>
-          {% if not viatico.aprobado %}
-          <a href="{% url 'aprobar_viatico' viatico.id %}">Aprobar</a>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </table>
+    <header class="header">
+      <div class="bienvenido">
+        <h2>Bienvenido a SMART RH</h2>
+      </div>
+      <div class="user">
+        {% if user.is_authenticated %}
+        <p>Hola, {{ user.username }}!</p>
+        <p>Rol: {{ user.role }}</p>
+        <p>Ocupacion: {{ user.ocupacion }}</p>
+        <div class="boton-logout">
+          <!-- Botón para cerrar sesión -->
+          <a href="{% url 'logout' %}">
+            <button class="logout">Cerrar Sesión</button>
+          </a>
+        </div>
+        {% else %}
+        <p>No has iniciado sesión.</p>
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        {% endif %}
+      </div>
+    </header>
+    <main class="container_viaticos">
+      <div class="listado_viaticos">
+        <h2>Lista de Solicitudes de Viáticos</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Solicitud</th>
+              <th>Sustentos</th>
+              <th>Aprobado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for viatico in viaticos %}
+            <tr>
+              <td>{{ viatico.user.username }}</td>
+              <td>{{ viatico.solicitud }}</td>
+              <td>{{ viatico.sustentos }}</td>
+              <td>{{ viatico.aprobado }}</td>
+              <td>
+                {% if not viatico.aprobado %}
+                <a
+                  href="{% url 'aprobar_viatico' viatico.id %}"
+                  class="btn-approve"
+                  >Aprobar</a
+                >
+                {% else %}
+                <span>Aprobado</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="descripcion">
+        <h2>Solicitudes Viaticos</h2>
+        <p>
+          Al dar click en aprobar se enviara un correo al area correspondiente
+          de la aprobacion de la solicitud
+        </p>
+      </div>
+    </main>
+    <footer>
+      <p>Todos los derechos reservados.</p>
+      <p>Desarrollado por: Grupo 3</p>
+    </footer>
   </body>
 </html>

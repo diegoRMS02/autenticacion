@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,logout, get_user_model
 from .forms import CustomUserCreationForm, ViaticoForm, CustomAuthenticationForm
 from .models import Viatico
+from .forms import EditUserForm
 User = get_user_model()
 @login_required
 def home(request):
@@ -81,3 +82,16 @@ def aprobar_viatico(request, viatico_id):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def listar_usuarios(request): 
+    usuarios = User.objects.all() 
+    return render(request, 'listar_usuarios.html', {'usuarios': usuarios})
+def editar_usuario(request, user_id): 
+    usuario = get_object_or_404(User, id=user_id) 
+    if request.method == 'POST': 
+        form = EditUserForm(request.POST, instance=usuario) 
+        if form.is_valid(): form.save() 
+        return redirect('listar_usuarios') 
+    else: 
+        form = EditUserForm(instance=usuario) 
+    return render(request, 'editar_usuario.html', {'form': form})

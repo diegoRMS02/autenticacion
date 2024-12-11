@@ -22,7 +22,6 @@
         <p>Rol: {{ user.role }}</p>
         <p>Ocupacion: {{ user.ocupacion}}</p>
         <div class="boton-logout">
-          <!-- Botón para cerrar sesión -->
           <a href="{% url 'logout' %}">
             <button class="logout">Cerrar Sesión</button>
           </a>
@@ -38,18 +37,59 @@
           <button class="boton-menu">Registrar Viático</button>
         </a>
       </div>
+      <!-- Botón extra solo para roles 'administrador' o 'gerencia' -->
+
+      {% if user.role == 'administrador' or user.role == 'gerencia' %}
+
       <div class="botones">
-        <img src="{% static 'images/aprobar.png' %}" alt="Ejemplo de Imagen" />
+        <div class="aprobar">
+          <img
+            src="{% static 'images/aprobar.png' %}"
+            alt="Ejemplo de Imagen"
+          />
 
-        <!-- Botón extra solo para roles 'administrador' o 'gerencia' -->
-        {% if user.role == 'administrador' or user.role == 'gerencia' %}
-        <a href="{% url 'listar_viaticos' %}">
-          <button class="boton-menu">Aprobar Viático</button>
-        </a>
-        {% endif %}
+          <a href="{% url 'listar_viaticos' %}">
+            <button class="boton-menu">Aprobar Viático</button>
+          </a>
+        </div>
       </div>
+      <div class="botones">
+        <div class="aprobar">
+          <img
+            src="{% static 'images/registrar-usuario.png' %}"
+            alt="Ejemplo de Imagen"
+          />
 
-      {% else %}
+          <a href="{% url 'register' %}">
+            <button class="boton-menu">Registrar Usuario</button>
+          </a>
+        </div>
+      </div>
+      <div class="botones">
+        <div class="aprobar">
+          <img
+            src="{% static 'images/registrar-usuario.png' %}"
+            alt="Ejemplo de Imagen"
+          />
+
+          <a href="{% url 'listar_usuarios' %}">
+            <button class="boton-menu">Empleados</button>
+          </a>
+        </div>
+      </div>
+      <div class="botones">
+        <div class="aprobar">
+          <img
+            src="{% static 'images/registrar-usuario.png' %}"
+            alt="Ejemplo de Imagen"
+          />
+
+          <a href="{% url 'register' %}">
+            <button class="boton-menu">Almacen</button>
+          </a>
+        </div>
+      </div>
+      {% endif %} {% else %}
       <p>No has iniciado sesión.</p>
       <a href="{% url 'login' %}">Iniciar Sesión</a>
       {% endif %}

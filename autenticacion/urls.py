@@ -9,5 +9,6 @@ urlpatterns = [
     path('listar_viaticos/', views.listar_viaticos, name='listar_viaticos'),
     path('aprobar_viatico/<int:viatico_id>/', views.aprobar_viatico, name='aprobar_viatico'),
     path('logout/', views.logout_view, name='logout'),
-
+    path('listar_usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('editar_usuario/<int:user_id>/', views.editar_usuario, name='editar_usuario'),
 ]

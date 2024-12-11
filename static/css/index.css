@@ -11,6 +11,7 @@ body {
 
   height: 100vh;
 }
+
 header {
   background-color: #2f6578;
   color: white;
@@ -31,8 +32,8 @@ header h2 {
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 .container {
-  background-color: white;
   padding: 5rem;
   display: flex;
   gap: 3rem;
@@ -42,26 +43,20 @@ header h2 {
   height: 70%;
 }
 
-/* .app-item:hover {
-  background-color: #1f4c5b;
-  cursor: pointer;
+/* .bienvenido h2 {
+  color: white;
 } */
 .icon {
   margin-right: 10px;
   font-size: 24px;
 }
-/* .boton-logout {
-  margin-left: auto;
-  color: black;
-  border-radius: 5px;
-} */
+
 .logout {
   margin-left: auto;
   color: black;
   cursor: pointer;
 }
 .botones {
-  height: 250px;
   padding: 1rem;
   background-color: #ffffff;
   display: flex;
@@ -71,6 +66,11 @@ header h2 {
   margin-top: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s;
+  border-radius: 5px;
+}
+.aprobar {
+  width: auto;
+  height: auto;
 }
 .botones:hover {
   transform: translateY(-5px);
