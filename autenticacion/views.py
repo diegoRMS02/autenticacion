@@ -95,3 +95,9 @@ def editar_usuario(request, user_id):
     else: 
         form = EditUserForm(instance=usuario) 
     return render(request, 'editar_usuario.html', {'form': form})
+def historial_viaticos(request):
+    historial = Viatico.objects.all()
+    return render(request, 'historial_viaticos.html', {'viaticos': historial})
+
+def almacen(request): 
+    return render(request, 'almacen.html')

@@ -19,7 +19,7 @@
   <body>
     <header class="header">
       <div class="bienvenido">
-        <h2>SMART RH</h2>
+        <a href="{% url 'home' %}"><h2>SMART RH</h2></a>
       </div>
       <div class="user">
         {% if user.is_authenticated %}

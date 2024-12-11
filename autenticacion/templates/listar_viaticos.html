@@ -20,7 +20,7 @@
   <body>
     <header class="header">
       <div class="bienvenido">
-        <h2>Bienvenido a SMART RH</h2>
+        <a href="{% url 'home' %}"><h2>SMART RH</h2></a>
       </div>
       <div class="user">
         {% if user.is_authenticated %}
@@ -48,38 +48,36 @@
               <th>Usuario</th>
               <th>Solicitud</th>
               <th>Sustentos</th>
-              <th>Aprobado</th>
               <th>Acción</th>
             </tr>
           </thead>
           <tbody>
-            {% for viatico in viaticos %}
+            {% for viatico in viaticos %} {% if not viatico.aprobado %}
             <tr>
               <td>{{ viatico.user.username }}</td>
               <td>{{ viatico.solicitud }}</td>
               <td>{{ viatico.sustentos }}</td>
-              <td>{{ viatico.aprobado }}</td>
               <td>
-                {% if not viatico.aprobado %}
                 <a
                   href="{% url 'aprobar_viatico' viatico.id %}"
                   class="btn-approve"
                   >Aprobar</a
                 >
-                {% else %}
-                <span>Aprobado</span>
-                {% endif %}
               </td>
             </tr>
-            {% endfor %}
+            {% endif %} {% endfor %}
           </tbody>
         </table>
+        <!-- Botón para ver el historial de viáticos -->
+        <a href="{% url 'historial_viaticos' %}" class="btn-historial"
+          >Ver Historial de Viáticos</a
+        >
       </div>
       <div class="descripcion">
-        <h2>Solicitudes Viaticos</h2>
+        <h2>Solicitudes Viáticos</h2>
         <p>
-          Al dar click en aprobar se enviara un correo al area correspondiente
-          de la aprobacion de la solicitud
+          Al dar click en aprobar se enviará un correo al área correspondiente
+          de la aprobación de la solicitud.
         </p>
       </div>
     </main>
